@@ -45,7 +45,7 @@ int 	calc_pixel(t_struct *st, long double x, long double y)
 	y = y / (st->h / 2 / r);
 	st->x0 = x;
 	st->y0 = y;
-	while (i < st->cycle && x *x + y * y < r * r)
+	while (i < st->cycle && x * x + y * y < r * r)
 	{
 		formulas(st, &x, &y);
 		i++;
@@ -55,27 +55,25 @@ int 	calc_pixel(t_struct *st, long double x, long double y)
 	return (color(st, i));
 }
 
-void 	fractal(t_struct *st)
+void 	*fractal(void *s)
 {
 	int i;
 	int j;
+	t_struct *st;
 
-	j = (-st->heigth) / 2;
-//	printf("j: %d he: %d\n", j, st->heigth);
-	while (j < st->heigth / 2)
+	st = (t_struct*)s;
+	j = -st->heigth / 2 + st->str * st->heigth / st->pot;
+	while (j < -st->heigth / 2 + (st->str + 1) * st->heigth / st->pot)
 	{
-//		write(1, "1", 1);
-//		printf("j: %d\n", j);
 		i = -st->width / 2;
 		while (i < st->width / 2)
 		{
-//			printf("k: %d\n", (j + st->heigth / 2) * st->width + (i + st->width / 2));
-			st->data[(j + st->heigth / 2) * st->width + (i + st->width / 2)] = calc_pixel(st, (long double)i, (long double)j);
+			st->data[(j + st->heigth / 2) * st->width + (i + st->width / 2)] = calc_pixel(st, (long double)i + st->shift_x, (long double)j + st->shift_y);
 			i++;
 		}
 		j++;
 	}
-	write(1, "Z", 1);
+	return (0);
 }
 
 void 	st_init(t_struct *st)
@@ -89,6 +87,9 @@ void 	st_init(t_struct *st)
 	st->c = 0;
 	st->u = 0;
 	st->move = 0;
+	st->pot = 6;
+	st->shift_x = 0;
+	st->shift_y = 0;
 }
 
 void	get_black(t_struct *st)
@@ -101,43 +102,70 @@ void	get_black(t_struct *st)
 }
 
 //			ДВИЖЕНИЕ МЫШКИ
-//int 	mouse_move(int x, int y, void *s)
-//{
-//	t_struct *st;
-//
-//	st = (t_struct *)s;
-//	if (!(st->move))
-//		return (0);
-//	st->c = ((float)x - st->width / 2) / (st->width / 2);
-//	st->u = ((float)y - st->heigth / 2) / (st->heigth / 2);
-//	get_black(st);
-//	fractal(st);
-//	mlx_put_image_to_window(st->mlx, st->win, st->img, 0, 0);
-//	return (0);
-//}
-
-int 	key_press(int key, void *s)
+int 	mouse_move(int x, int y, void *s)
 {
 	t_struct *st;
 
 	st = (t_struct *)s;
-	if (key == 53)
-		exit(0);
-	if (key == 116)
+	if (!(st->move))
+		return (0);
+	st->c = ((float)x - st->width / 2) / (st->width / 2);
+	st->u = ((float)y - st->heigth / 2) / (st->heigth / 2);
+	get_black(st);
+	threads(st);
+	mlx_put_image_to_window(st->mlx, st->win, st->img, 0, 0);
+	printf("x: %d  y: %d\n", x, y);
+	return (0);
+}
+
+int 	mouse_put(int b, int x, int y, void *s)
+{
+	t_struct *st;
+
+	st = (t_struct *)s;
+	if (x < 0 || y < 0 || x > st->width || y > st->heigth)
+		return (0);
+	if (b == 4)
 	{
-		st->c += 0.01;
-		st->u += 0.01;
+		st->h *= 1.1;
+		st->w *= 1.1;
+		st->shift_x = x;
+		st->shift_y = y;
 	}
-	else if (key == 121)
+	else if (b == 5)
 	{
-		st->c -= 0.01;
-		st->u -= 0.01;
+		st->h /= 1.1;
+		st->w /= 1.1;
+		st->shift_x = x;
+		st->shift_y = y;
 	}
 	get_black(st);
-	fractal(st);
+	threads(st);
 	mlx_put_image_to_window(st->mlx, st->win, st->img, 0, 0);
-//	printf("%d\n", key);
+	printf("b: %d  x: %d  y: %d\n", b, x, y);
 	return (0);
+}
+
+void	threads(t_struct *data)
+{
+	t_struct 			lst[data->pot];
+	pthread_t		threads[data->pot];
+	pthread_attr_t	attr;
+	void			*status;
+
+	pthread_attr_init(&attr);
+	pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
+	data->str = -1;
+	while (++(data->str) < data->pot)
+	{
+		ft_memcpy((void*)&lst[data->str], (void *)data, sizeof(t_struct));
+		pthread_create(&threads[data->str],
+							NULL, fractal, (void *)(&lst[data->str]));
+	}
+	pthread_attr_destroy(&attr);
+	data->str = -1;
+	while (++(data->str) < data->pot)
+		pthread_join(threads[data->str], &status);
 }
 
 int 	main()
@@ -151,9 +179,11 @@ int 	main()
 	st->win = mlx_new_window(st->mlx, WIDTH, HEIGHT, "FDF");
 	st->img = mlx_new_image(st->mlx, WIDTH, HEIGHT);
 	mlx_hook(st->win, 2, 0, key_press, (void *)st);
+	mlx_hook(st->win, 6, 0, mouse_move, (void *)st);
+	mlx_hook(st->win, 4, 0, mouse_put, (void *)st);
 	st->data = (int *)mlx_get_data_addr(st->img,
 			&(st->n0), &(st->n1), &(st->n2));
-	fractal(st);
+	threads(st);
 	mlx_put_image_to_window(st->mlx, st->win, st->img, 0, 0);
 	mlx_loop(st->mlx);
 	return (0);

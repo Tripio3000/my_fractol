@@ -8,6 +8,7 @@
 # include "../libft/libft.h"
 # include <stdlib.h>
 # include <stdio.h>
+# include <pthread.h>
 
 typedef struct 		s_struct
 {
@@ -25,12 +26,19 @@ typedef struct 		s_struct
 	long double		x0;
 	long double		y0;
 	long double		tmp;
+	long double		shift_x;
+	long double		shift_y;
 	double 			c;
 	double 			u;
 	int 			move;
 	int 			str;
 	int 			cycle;
 	int 			color;
+	int 			pot;
 }					t_struct;
+
+void	threads(t_struct *data);
+int 	key_press(int key, void *s);
+int 	key_press1(int key, t_struct *st);
 
 #endif
