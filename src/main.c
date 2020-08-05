@@ -29,9 +29,30 @@ void 	formulas(t_struct *st, long double *x, long double *y)
 {
 	long double	tmp;
 
-	tmp = *x * *x - *y * *y + st->x0 + st->c;
-	*y = 2 * *x * *y + st->y0 + st->u;
-	*x = tmp;
+	if (st->f == 1)
+	{
+		tmp = *x * *x - *y * *y + st->x0 + st->c;
+		*y = 2 * *x * *y + st->y0 + st->u;
+		*x = tmp;
+	}
+	else if (st->f == 2)
+	{
+		tmp = *x * *x - *y * *y + + st->c;
+		*y = 2 * *x * *y + + st->u;
+		*x = tmp;
+	}
+	else if (st->f == 3)
+	{
+		tmp = *x * (*x * *x - 3 * (*y * *y)) + st->c;
+		*y = *y * (3 * (*x * *x) - *y * *y) + st->u;
+		*x = tmp;
+	}
+	else if (st->f == 4)
+	{
+		tmp = *x * (*x * *x - 3 * (*y * *y)) + st->x0 + st->c;
+		*y = *y * (3 * (*x * *x) - *y * *y) + st->y0 + st->u;
+		*x = tmp;
+	}
 }
 
 int 	calc_pixel(t_struct *st, long double x, long double y)
@@ -82,14 +103,15 @@ void 	st_init(t_struct *st)
 	st->width = WIDTH;
 	st->h = HEIGHT;
 	st->w = WIDTH;
-	st->cycle = 50;
+	st->cycle = 51;
 	st->color = 0;
 	st->c = 0;
 	st->u = 0;
 	st->move = 0;
-	st->pot = 6;
+	st->pot = 10;
 	st->shift_x = 0;
 	st->shift_y = 0;
+	st->f = 4;
 }
 
 void	get_black(t_struct *st)
@@ -129,20 +151,28 @@ int 	mouse_put(int b, int x, int y, void *s)
 	{
 		st->h *= 1.1;
 		st->w *= 1.1;
-		st->shift_x = x;
-		st->shift_y = y;
+		st->shift_x -= st->width / 2 - x;
+		st->shift_y -= st->heigth / 2 - y;
+		st->shift_x *= 1.1;
+		st->shift_y *= 1.1;
+		st->shift_x += st->width / 2 - x;
+		st->shift_y += st->heigth / 2 - y;
 	}
 	else if (b == 5)
 	{
 		st->h /= 1.1;
 		st->w /= 1.1;
-		st->shift_x = x;
-		st->shift_y = y;
+		st->shift_x -= st->width / 2 - x;
+		st->shift_y -= st->heigth / 2 - y;
+		st->shift_x /= 1.1;
+		st->shift_y /= 1.1;
+		st->shift_x += st->width / 2 - x;
+		st->shift_y += st->heigth / 2 - y;
 	}
 	get_black(st);
 	threads(st);
 	mlx_put_image_to_window(st->mlx, st->win, st->img, 0, 0);
-	printf("b: %d  x: %d  y: %d\n", b, x, y);
+//	printf("b: %d  x: %d  y: %d\n", b, x, y);
 	return (0);
 }
 

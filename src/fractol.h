@@ -1,7 +1,7 @@
 #ifndef MY_FRACTOL_H
 # define MY_FRACTOL_H
-# define HEIGHT 1000
-# define WIDTH 1000
+# define HEIGHT 1300
+# define WIDTH 1300
 
 # include <math.h>
 # include "../MinilibX/mlx.h"
@@ -35,6 +35,7 @@ typedef struct 		s_struct
 	int 			cycle;
 	int 			color;
 	int 			pot;
+	int 			f;
 }					t_struct;
 
 void	threads(t_struct *data);

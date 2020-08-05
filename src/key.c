@@ -49,6 +49,10 @@ int 	key_press(int key, void *s)
 		st->shift_x += 10;
 	else if (key == 124)
 		st->shift_x -= 10;
+	else if (key == 116)
+		st->cycle += 5;
+	else if (key == 121)
+		st->cycle -= 5;
 	if (key == 49 && st->move == 1)
 		st->move = 0;
 	else if (key == 49)
