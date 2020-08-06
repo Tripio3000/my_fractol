@@ -42,5 +42,6 @@ void	threads(t_struct *data);
 int 	key_press(int key, void *s);
 int 	key_press1(int key, t_struct *st);
 void 	check(int ac, char **av, t_struct *st);
+void	get_black(t_struct *st);
 
 #endif

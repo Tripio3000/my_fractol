@@ -2,10 +2,22 @@
 
 int 	key_press2(int key, t_struct *st)
 {
+	if (key == 69)
+	{
+		st->color++;
+		if (st->color == 6)
+			st->color = 0;
+	}
+	else if (key == 78)
+	{
+		st->color--;
+		if (st->color == -1)
+			st->color = 5;
+	}
 	get_black(st);
 	threads(st);
 	mlx_put_image_to_window(st->mlx, st->win, st->img, 0, 0);
-//	printf("%d\n", key);
+	printf("%d\n", key);
 	return (0);
 }
 

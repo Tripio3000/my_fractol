@@ -6,6 +6,40 @@ void 	error(void)
 	exit(0);
 }
 
+int 	color2(t_struct *st, int red, int green, int blue)
+{
+	if (st->color == 4)
+	{
+		red = (int)(9 * (1 - st->tmp) * pow(st->tmp, 3) * 255);
+		green = (int)(15 * pow((1 - st->tmp), 2) * pow(st->tmp, 2) * 255);   //сине-желтый
+		blue = (int)(8.5 * pow((1 - st->tmp), 3) * st->tmp * 255);
+	}
+	else if (st->color == 5)
+	{
+		red = (int)(12 * (1 - st->tmp) * 255);
+		green = (int)(5 * pow((1 - st->tmp), 2) * 255); //разноцветный
+		blue = (int)(20 * pow((1 - st->tmp), 3) * 255);
+	}
+	return (red << 16 | green << 8 | blue);
+}
+
+int 	color1(t_struct *st, int red, int green, int blue)
+{
+	if (st->color == 2)
+	{
+		red = (int)(50 * (1 - st->tmp) * 255);
+		green = (int)(100 * 1 / pow(2, st->tmp) * 255); //яракий: красный желтый оранжевый, теплые цвета
+		blue = (int)(50 * 1 / (st->tmp + 200) * 255);
+	}
+	else if (st->color == 3)
+	{
+		red = (int)(50 * (1 - st->tmp) * 255);
+		green = (int)(100 * 1 / (st->tmp + 200) * 255); //зеленый и оранжевый
+		blue = 0xFF - (int)(50 * 1 / (st->tmp + 200) * 55);
+	}
+	return (color2(st, red, green, blue));
+}
+
 int 	color(t_struct *st, int i)
 {
 	int			red;
@@ -16,43 +50,19 @@ int 	color(t_struct *st, int i)
 	green = 0;
 	blue = 0;
 	st->tmp = (long double)i / (long double)st->cycle;
-	if (st->color == 1)
+	if (st->color == 0)
 	{
 		red = (int)(9 * (1 - st->tmp) * pow(st->tmp, 3) * 255);
-		green = (int)(15 * pow((1 - st->tmp), 2) * pow(st->tmp, 2) * 255);
+		green = (int)(15 * pow((1 - st->tmp), 2) * pow(st->tmp, 2) * 255); //основной
 		blue = 0xFF - (int)(8.5 * pow((1 - st->tmp), 3) * st->tmp * 255);
 	}
 	else if (st->color == 1)
 	{
-		red = (int)(5 * (pow(st->tmp, 2) - 300) * 255);
-		green = (int)(10 * 1 / st->tmp * 255);
-		blue = (int)(5 * 1 / (st->tmp + 200) * 255);
+		red = (int)(5 * (1 - st->tmp) * 255);
+		green = (int)(5 * (1 - st->tmp) * 255); //черно-белый
+		blue = (int)(5 * (1 - st->tmp) * 255);
 	}
-	else if (st->color == 1)
-	{
-		red = (int)(50 * (1 - st->tmp) * 255);
-		green = (int)(100 * 1 / pow(2, st->tmp) * 255); //яракий: красный желтый оранжевый, теплые цвета
-		blue = (int)(50 * 1 / (st->tmp + 200) * 255);
-	}
-	else if (st->color == 0)
-	{
-		red = (int)(50 * (1 - st->tmp) * 255);
-		green = (int)(100 * 1 / (st->tmp + 200) * 255); //зеленый и оранжевый
-		blue = 0xFF - (int)(50 * 1 / (st->tmp + 200) * 55);
-	}
-	else if (st->color == 1)
-	{
-		red = (int)(0.5 * (1 - st->tmp) * 255);
-		green = (int)(62 * (st->tmp + 200) * 255);   //+- нормально
-		blue = (int)(13 * (st->tmp + 200) * 255);
-	}
-	else if (st->color == 1)
-	{
-		red = (int)(12 * (1 - st->tmp) * 255);
-		green = (int)(5 * pow((1 - st->tmp), 2) * 255);
-		blue = (int)(20 * pow((1 - st->tmp), 3) * 255);
-	}
-	return (red << 16 | green << 8 | blue);
+	return (color1(st, red, green, blue));
 }
 
 void 	formulas(t_struct *st, long double *x, long double *y)
@@ -119,7 +129,9 @@ void 	*fractal(void *s)
 		i = -st->width / 2;
 		while (i < st->width / 2)
 		{
-			st->data[(j + st->heigth / 2) * st->width + (i + st->width / 2)] = calc_pixel(st, (long double)i + st->shift_x, (long double)j + st->shift_y);
+			st->data[(j + st->heigth / 2) * st->width + (i + st->width / 2)] =
+					calc_pixel(st, (long double)i + st->shift_x,
+							(long double)j + st->shift_y);
 			i++;
 		}
 		j++;
@@ -237,7 +249,7 @@ int 	main(int ac, char **av)
 	st->mlx = mlx_init();
 	st_init(st);
 	check(ac, av, st);
-	st->win = mlx_new_window(st->mlx, WIDTH, HEIGHT, "FDF");
+	st->win = mlx_new_window(st->mlx, WIDTH, HEIGHT, "Fract'ol");
 	st->img = mlx_new_image(st->mlx, WIDTH, HEIGHT);
 	mlx_hook(st->win, 2, 0, key_press, (void *)st);
 	mlx_hook(st->win, 6, 0, mouse_move, (void *)st);
