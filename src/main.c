@@ -16,7 +16,37 @@ int 	color(t_struct *st, int i)
 	green = 0;
 	blue = 0;
 	st->tmp = (long double)i / (long double)st->cycle;
-	if (st->color == 0)
+	if (st->color == 1)
+	{
+		red = (int)(9 * (1 - st->tmp) * pow(st->tmp, 3) * 255);
+		green = (int)(15 * pow((1 - st->tmp), 2) * pow(st->tmp, 2) * 255);
+		blue = 0xFF - (int)(8.5 * pow((1 - st->tmp), 3) * st->tmp * 255);
+	}
+	else if (st->color == 1)
+	{
+		red = (int)(5 * (pow(st->tmp, 2) - 300) * 255);
+		green = (int)(10 * 1 / st->tmp * 255);
+		blue = (int)(5 * 1 / (st->tmp + 200) * 255);
+	}
+	else if (st->color == 1)
+	{
+		red = (int)(50 * (1 - st->tmp) * 255);
+		green = (int)(100 * 1 / pow(2, st->tmp) * 255); //яракий: красный желтый оранжевый, теплые цвета
+		blue = (int)(50 * 1 / (st->tmp + 200) * 255);
+	}
+	else if (st->color == 0)
+	{
+		red = (int)(50 * (1 - st->tmp) * 255);
+		green = (int)(100 * 1 / (st->tmp + 200) * 255); //зеленый и оранжевый
+		blue = 0xFF - (int)(50 * 1 / (st->tmp + 200) * 55);
+	}
+	else if (st->color == 1)
+	{
+		red = (int)(0.5 * (1 - st->tmp) * 255);
+		green = (int)(62 * (st->tmp + 200) * 255);   //+- нормально
+		blue = (int)(13 * (st->tmp + 200) * 255);
+	}
+	else if (st->color == 1)
 	{
 		red = (int)(12 * (1 - st->tmp) * 255);
 		green = (int)(5 * pow((1 - st->tmp), 2) * 255);
@@ -111,7 +141,7 @@ void 	st_init(t_struct *st)
 	st->pot = 10;
 	st->shift_x = 0;
 	st->shift_y = 0;
-	st->f = 4;
+	st->f = 3;
 }
 
 void	get_black(t_struct *st)
@@ -136,7 +166,7 @@ int 	mouse_move(int x, int y, void *s)
 	get_black(st);
 	threads(st);
 	mlx_put_image_to_window(st->mlx, st->win, st->img, 0, 0);
-	printf("x: %d  y: %d\n", x, y);
+//	printf("x: %d  y: %d\n", x, y);
 	return (0);
 }
 
@@ -198,7 +228,7 @@ void	threads(t_struct *data)
 		pthread_join(threads[data->str], &status);
 }
 
-int 	main()
+int 	main(int ac, char **av)
 {
 	t_struct *st;
 
@@ -206,6 +236,7 @@ int 	main()
 		error();
 	st->mlx = mlx_init();
 	st_init(st);
+	check(ac, av, st);
 	st->win = mlx_new_window(st->mlx, WIDTH, HEIGHT, "FDF");
 	st->img = mlx_new_image(st->mlx, WIDTH, HEIGHT);
 	mlx_hook(st->win, 2, 0, key_press, (void *)st);

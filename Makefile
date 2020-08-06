@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-FILES = src/main.c src/key.c
+FILES = src/main.c src/key.c src/check_args.c
 FLAG = -Wall -Wextra -Werror
 LIB = libft/libft.a
 NAME = fractol
