@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vabraham <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: cseabass <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/11/03 18:54:24 by vabraham          #+#    #+#              #
-#    Updated: 2019/11/13 16:56:07 by vabraham         ###   ########.fr        #
+#    Created: 2020/08/06 22:43:19 by cseabass          #+#    #+#              #
+#    Updated: 2020/08/06 22:43:20 by cseabass         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-FILES = src/main.c src/key.c src/check_args.c
+FILES = src/main.c src/key.c src/check_args.c src/color.c src/mouse.c
 FLAG = -Wall -Wextra -Werror
 LIB = libft/libft.a
 NAME = fractol
@@ -22,7 +22,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	@make -C libft re
 	@make -C ./MinilibX
-	@gcc -L libft -lft $(FILES) -I includes/libft -I src/fractal.h -o $(NAME) $(MLX_FLAGS)
+	@gcc $(FLAG) -L libft -lft $(FILES) -I includes/libft -I src/fractal.h -o $(NAME) $(MLX_FLAGS)
 %.o: %.c
 	@gcc -I src/fractal.h -I ./MinilibX -I ./libft $< -c -o $@
 

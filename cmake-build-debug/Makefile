@@ -1689,6 +1689,87 @@ libft/ft_toupper.c.s:
 	$(MAKE) -f CMakeFiles/my_fractol.dir/build.make CMakeFiles/my_fractol.dir/libft/ft_toupper.c.s
 .PHONY : libft/ft_toupper.c.s
 
+src/check_args.o: src/check_args.c.o
+
+.PHONY : src/check_args.o
+
+# target to build an object file
+src/check_args.c.o:
+	$(MAKE) -f CMakeFiles/my_fractol.dir/build.make CMakeFiles/my_fractol.dir/src/check_args.c.o
+.PHONY : src/check_args.c.o
+
+src/check_args.i: src/check_args.c.i
+
+.PHONY : src/check_args.i
+
+# target to preprocess a source file
+src/check_args.c.i:
+	$(MAKE) -f CMakeFiles/my_fractol.dir/build.make CMakeFiles/my_fractol.dir/src/check_args.c.i
+.PHONY : src/check_args.c.i
+
+src/check_args.s: src/check_args.c.s
+
+.PHONY : src/check_args.s
+
+# target to generate assembly for a file
+src/check_args.c.s:
+	$(MAKE) -f CMakeFiles/my_fractol.dir/build.make CMakeFiles/my_fractol.dir/src/check_args.c.s
+.PHONY : src/check_args.c.s
+
+src/color.o: src/color.c.o
+
+.PHONY : src/color.o
+
+# target to build an object file
+src/color.c.o:
+	$(MAKE) -f CMakeFiles/my_fractol.dir/build.make CMakeFiles/my_fractol.dir/src/color.c.o
+.PHONY : src/color.c.o
+
+src/color.i: src/color.c.i
+
+.PHONY : src/color.i
+
+# target to preprocess a source file
+src/color.c.i:
+	$(MAKE) -f CMakeFiles/my_fractol.dir/build.make CMakeFiles/my_fractol.dir/src/color.c.i
+.PHONY : src/color.c.i
+
+src/color.s: src/color.c.s
+
+.PHONY : src/color.s
+
+# target to generate assembly for a file
+src/color.c.s:
+	$(MAKE) -f CMakeFiles/my_fractol.dir/build.make CMakeFiles/my_fractol.dir/src/color.c.s
+.PHONY : src/color.c.s
+
+src/key.o: src/key.c.o
+
+.PHONY : src/key.o
+
+# target to build an object file
+src/key.c.o:
+	$(MAKE) -f CMakeFiles/my_fractol.dir/build.make CMakeFiles/my_fractol.dir/src/key.c.o
+.PHONY : src/key.c.o
+
+src/key.i: src/key.c.i
+
+.PHONY : src/key.i
+
+# target to preprocess a source file
+src/key.c.i:
+	$(MAKE) -f CMakeFiles/my_fractol.dir/build.make CMakeFiles/my_fractol.dir/src/key.c.i
+.PHONY : src/key.c.i
+
+src/key.s: src/key.c.s
+
+.PHONY : src/key.s
+
+# target to generate assembly for a file
+src/key.c.s:
+	$(MAKE) -f CMakeFiles/my_fractol.dir/build.make CMakeFiles/my_fractol.dir/src/key.c.s
+.PHONY : src/key.c.s
+
 src/main.o: src/main.c.o
 
 .PHONY : src/main.o
@@ -1715,6 +1796,33 @@ src/main.s: src/main.c.s
 src/main.c.s:
 	$(MAKE) -f CMakeFiles/my_fractol.dir/build.make CMakeFiles/my_fractol.dir/src/main.c.s
 .PHONY : src/main.c.s
+
+src/mouse.o: src/mouse.c.o
+
+.PHONY : src/mouse.o
+
+# target to build an object file
+src/mouse.c.o:
+	$(MAKE) -f CMakeFiles/my_fractol.dir/build.make CMakeFiles/my_fractol.dir/src/mouse.c.o
+.PHONY : src/mouse.c.o
+
+src/mouse.i: src/mouse.c.i
+
+.PHONY : src/mouse.i
+
+# target to preprocess a source file
+src/mouse.c.i:
+	$(MAKE) -f CMakeFiles/my_fractol.dir/build.make CMakeFiles/my_fractol.dir/src/mouse.c.i
+.PHONY : src/mouse.c.i
+
+src/mouse.s: src/mouse.c.s
+
+.PHONY : src/mouse.s
+
+# target to generate assembly for a file
+src/mouse.c.s:
+	$(MAKE) -f CMakeFiles/my_fractol.dir/build.make CMakeFiles/my_fractol.dir/src/mouse.c.s
+.PHONY : src/mouse.c.s
 
 # Help Target
 help:
@@ -1899,9 +2007,21 @@ help:
 	@echo "... libft/ft_toupper.o"
 	@echo "... libft/ft_toupper.i"
 	@echo "... libft/ft_toupper.s"
+	@echo "... src/check_args.o"
+	@echo "... src/check_args.i"
+	@echo "... src/check_args.s"
+	@echo "... src/color.o"
+	@echo "... src/color.i"
+	@echo "... src/color.s"
+	@echo "... src/key.o"
+	@echo "... src/key.i"
+	@echo "... src/key.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/mouse.o"
+	@echo "... src/mouse.i"
+	@echo "... src/mouse.s"
 .PHONY : help
 
 

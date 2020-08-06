@@ -57,7 +57,11 @@ file(REMOVE_RECURSE
   "CMakeFiles/my_fractol.dir/libft/ft_strtrim.c.o"
   "CMakeFiles/my_fractol.dir/libft/ft_tolower.c.o"
   "CMakeFiles/my_fractol.dir/libft/ft_toupper.c.o"
+  "CMakeFiles/my_fractol.dir/src/check_args.c.o"
+  "CMakeFiles/my_fractol.dir/src/color.c.o"
+  "CMakeFiles/my_fractol.dir/src/key.c.o"
   "CMakeFiles/my_fractol.dir/src/main.c.o"
+  "CMakeFiles/my_fractol.dir/src/mouse.c.o"
   "my_fractol"
   "my_fractol.pdb"
 )

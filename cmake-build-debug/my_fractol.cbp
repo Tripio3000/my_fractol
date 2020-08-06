@@ -259,10 +259,22 @@
 		<Unit filename="/Users/cseabass/my_fractol/libft/libft.h">
 			<Option target="my_fractol"/>
 		</Unit>
+		<Unit filename="/Users/cseabass/my_fractol/src/check_args.c">
+			<Option target="my_fractol"/>
+		</Unit>
+		<Unit filename="/Users/cseabass/my_fractol/src/color.c">
+			<Option target="my_fractol"/>
+		</Unit>
 		<Unit filename="/Users/cseabass/my_fractol/src/fractol.h">
 			<Option target="my_fractol"/>
 		</Unit>
+		<Unit filename="/Users/cseabass/my_fractol/src/key.c">
+			<Option target="my_fractol"/>
+		</Unit>
 		<Unit filename="/Users/cseabass/my_fractol/src/main.c">
+			<Option target="my_fractol"/>
+		</Unit>
+		<Unit filename="/Users/cseabass/my_fractol/src/mouse.c">
 			<Option target="my_fractol"/>
 		</Unit>
 		<Unit filename="/Users/cseabass/my_fractol/CMakeLists.txt">

@@ -1,6 +1,18 @@
-# include "fractol.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   key.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cseabass <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/06 22:42:39 by cseabass          #+#    #+#             */
+/*   Updated: 2020/08/06 22:42:40 by cseabass         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int 	key_press2(int key, t_struct *st)
+#include "fractol.h"
+
+int		key_press2(int key, t_struct *st)
 {
 	if (key == 69)
 	{
@@ -17,11 +29,10 @@ int 	key_press2(int key, t_struct *st)
 	get_black(st);
 	threads(st);
 	mlx_put_image_to_window(st->mlx, st->win, st->img, 0, 0);
-	printf("%d\n", key);
 	return (0);
 }
 
-int 	key_press1(int key, t_struct *st)
+int		key_press1(int key, t_struct *st)
 {
 	if (key == 89)
 	{
@@ -43,10 +54,10 @@ int 	key_press1(int key, t_struct *st)
 		st->c -= 0.0001;
 		st->u -= 0.0001;
 	}
-	return(key_press2(key, st));
+	return (key_press2(key, st));
 }
 
-int 	key_press(int key, void *s)
+int		key_press(int key, void *s)
 {
 	t_struct *st;
 
@@ -71,4 +82,3 @@ int 	key_press(int key, void *s)
 		st->move = 1;
 	return (key_press1(key, st));
 }
-

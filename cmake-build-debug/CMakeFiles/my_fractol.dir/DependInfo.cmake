@@ -62,7 +62,11 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/cseabass/my_fractol/libft/ft_strtrim.c" "/Users/cseabass/my_fractol/cmake-build-debug/CMakeFiles/my_fractol.dir/libft/ft_strtrim.c.o"
   "/Users/cseabass/my_fractol/libft/ft_tolower.c" "/Users/cseabass/my_fractol/cmake-build-debug/CMakeFiles/my_fractol.dir/libft/ft_tolower.c.o"
   "/Users/cseabass/my_fractol/libft/ft_toupper.c" "/Users/cseabass/my_fractol/cmake-build-debug/CMakeFiles/my_fractol.dir/libft/ft_toupper.c.o"
+  "/Users/cseabass/my_fractol/src/check_args.c" "/Users/cseabass/my_fractol/cmake-build-debug/CMakeFiles/my_fractol.dir/src/check_args.c.o"
+  "/Users/cseabass/my_fractol/src/color.c" "/Users/cseabass/my_fractol/cmake-build-debug/CMakeFiles/my_fractol.dir/src/color.c.o"
+  "/Users/cseabass/my_fractol/src/key.c" "/Users/cseabass/my_fractol/cmake-build-debug/CMakeFiles/my_fractol.dir/src/key.c.o"
   "/Users/cseabass/my_fractol/src/main.c" "/Users/cseabass/my_fractol/cmake-build-debug/CMakeFiles/my_fractol.dir/src/main.c.o"
+  "/Users/cseabass/my_fractol/src/mouse.c" "/Users/cseabass/my_fractol/cmake-build-debug/CMakeFiles/my_fractol.dir/src/mouse.c.o"
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")
 
