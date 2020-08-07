@@ -64,12 +64,12 @@ void	get_black(t_struct *st)
 void	instr(void)
 {
 	ft_putstr("\n\n******************** INSTRUCTION ********************\n");
-	ft_putstr("Mouse mov         -        change coefficient\n");
-	ft_putstr("Space             -        changing coefficient [ON/OFF]\n");
-	ft_putstr("4, 7 right side   -        coefficient -+ 0.01\n");
-	ft_putstr("5, 8 right side   -        coefficient -+ 0.0001\n");
-	ft_putstr("+, - right sid    -        change color theme\n");
-	ft_putstr("Arrows (up)       -        -+ 5 iterations of the loop\n");
-	ft_putstr("Arrows (down)     -        shift\n");
-	ft_putstr("ESC               -        exit\n");
+	ft_putstr("Mouse move           -      change coefficient\n");
+	ft_putstr("Space                -      changing coefficient [ON/OFF]\n");
+	ft_putstr("4, 7 right side      -      coefficient -+ 0.01\n");
+	ft_putstr("5, 8 right side      -      coefficient -+ 0.0001\n");
+	ft_putstr("+, - right side      -      change color theme\n");
+	ft_putstr("Arrows (up)          -      -+ 5 iterations of the loop\n");
+	ft_putstr("Arrows (down)        -      shift\n");
+	ft_putstr("ESC                  -      exit\n");
 }
